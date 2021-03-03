@@ -11,7 +11,8 @@ public class DeckHolder : MonoBehaviour, IHolder
     private void Start()
     {
         deck = transform.root.GetComponent<Deck>();
-        deckHolderID = Array.IndexOf(deck.deckHolders, this);
+        if (deck)
+            assignHolderID(Array.IndexOf(deck.deckHolders, this));
     }
 
     private void Update()
@@ -38,6 +39,11 @@ public class DeckHolder : MonoBehaviour, IHolder
         }
     }
 
+    public void assignHolderID(int id)
+    {
+        deckHolderID = id;
+    }
+
     public void hold(Node node)
     {
         //If the holder already has a node, then pass that node to the next holder
@@ -55,7 +61,7 @@ public class DeckHolder : MonoBehaviour, IHolder
             return;
         node.transform.SetParent(transform);
         node.transform.DOMove(transform.position, 0.2f);
-        node.mainSprite.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+        node.setMaskInteraction(SpriteMaskInteraction.VisibleInsideMask);
         this.node = node;
     }
 }

@@ -13,8 +13,15 @@ public class Deck : MonoBehaviour
 
     private void Awake()
     {
-        float posX = initialPoint;
         board = FindObjectOfType<Board>();
+        spawnDeckHolders();
+    }
+
+    private void spawnDeckHolders()
+    {
+        if (!board)
+            return;
+        float posX = initialPoint;
         deckHolders = new DeckHolder[board.width * board.height];
         for (int i = 0; i < board.width * board.height; i++)
         {

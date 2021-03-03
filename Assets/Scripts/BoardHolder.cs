@@ -3,15 +3,8 @@ using DG.Tweening;
 
 public class BoardHolder : MonoBehaviour, IHolder
 {
-    public int holderGridID;
-
-    public Board board;
     public Node node;
-
-    private void Awake()
-    {
-        board = FindObjectOfType<Board>();
-    }
+    public int boardHolderID;
 
     private void Update()
     {
@@ -21,6 +14,11 @@ public class BoardHolder : MonoBehaviour, IHolder
             if (node.transform.parent != transform)
                 node = null;
         }
+    }
+
+    public void assignHolderID(int id)
+    {
+        boardHolderID = id;
     }
 
     public void hold(Node node)

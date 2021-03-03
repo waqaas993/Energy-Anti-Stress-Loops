@@ -1,10 +1,40 @@
 ﻿using UnityEngine;
 using DG.Tweening;
 
+public enum NodeType
+{
+    biConnectorLeftDown,
+    biConnectorRightDown,
+    biConnectorUpLeft,
+    biConnectorUpRight,
+
+    boltDown,
+    boltLeft,
+    boltRight,
+    boltUp,
+
+    bulbDown,
+    bulbLeft,
+    bulbRight,
+    bulbUp,
+
+    lineHorizontol,
+    lineVertical,
+
+    triConnectorRightLeftDown,
+    triConnectorUpLeftDown,
+    triConnectorUpRightDown,
+    triConnectorUpRightLeft,
+
+    quadConnector
+}
+
 public class Node : MonoBehaviour, INode
 {
+    public NodeType nodeType;
+
     public Board board;
-    public SpriteRenderer mainSprite;
+    public SpriteRenderer[] nodeSprites;
 
     public bool selected;
     public LayerMask holderLayerMask;
@@ -12,7 +42,6 @@ public class Node : MonoBehaviour, INode
     private void Awake()
     {
         board = FindObjectOfType<Board>();
-        mainSprite = GetComponent<SpriteRenderer>();
     }
 
     public void onSelect()
@@ -20,7 +49,7 @@ public class Node : MonoBehaviour, INode
         selected = true;
         transform.SetParent(null);
         transform.DOScale(Vector3.one * 1.2f, 0.2f);
-        mainSprite.maskInteraction = SpriteMaskInteraction.None;
+        setMaskInteraction(SpriteMaskInteraction.None);
     }
 
     public void onRelease()
@@ -32,6 +61,14 @@ public class Node : MonoBehaviour, INode
         if (hit.collider != null)
         {
             hit.transform.GetComponent<IHolder>().hold(this);
+        }
+    }
+
+    public void setMaskInteraction(SpriteMaskInteraction spriteMaskInteraction)
+    {
+        for (int i = 0 ; i < nodeSprites.Length ; i++)
+        {
+            nodeSprites[i].maskInteraction = spriteMaskInteraction;
         }
     }
 }
