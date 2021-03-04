@@ -62,6 +62,7 @@ public class DeckHolder : MonoBehaviour, IHolder
         node.transform.SetParent(transform);
         node.transform.DOMove(transform.position, 0.2f);
         node.setMaskInteraction(SpriteMaskInteraction.VisibleInsideMask);
+        node.currentHolder = this;
         this.node = node;
     }
 }

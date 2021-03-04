@@ -3,6 +3,8 @@ using DG.Tweening;
 
 public enum NodeType
 {
+    none,
+
     biConnectorLeftDown,
     biConnectorRightDown,
     biConnectorUpLeft,
@@ -32,6 +34,8 @@ public enum NodeType
 public class Node : MonoBehaviour, INode
 {
     public NodeType nodeType;
+    public IHolder currentHolder;
+
 
     public Board board;
     public SpriteRenderer[] nodeSprites;
@@ -60,8 +64,9 @@ public class Node : MonoBehaviour, INode
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.forward, 100, holderLayerMask);
         if (hit.collider != null)
         {
-            hit.transform.GetComponent<IHolder>().hold(this);
+            currentHolder = hit.transform.GetComponent<IHolder>();
         }
+        currentHolder.hold(this);
     }
 
     public void setMaskInteraction(SpriteMaskInteraction spriteMaskInteraction)

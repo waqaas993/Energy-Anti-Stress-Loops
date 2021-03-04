@@ -4,7 +4,6 @@ public class Deck : MonoBehaviour
 {
     private Board board;
     public Transform content;
-    public GameObject deckHolderPrefab;
     public float initialPoint;
     //Distance between each deck holder spawn
     public float distance;
@@ -23,6 +22,7 @@ public class Deck : MonoBehaviour
             return;
         float posX = initialPoint;
         deckHolders = new DeckHolder[board.width * board.height];
+        GameObject deckHolderPrefab = Resources.Load("Prefabs/Deck Holder") as GameObject;
         for (int i = 0; i < board.width * board.height; i++)
         {
             GameObject deckHolder = Instantiate(deckHolderPrefab, Vector3.zero, Quaternion.identity) as GameObject;

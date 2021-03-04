@@ -4,7 +4,9 @@ using DG.Tweening;
 public class BoardHolder : MonoBehaviour, IHolder
 {
     public Node node;
+    public NodeType expectedNodeType;
     public int boardHolderID;
+    public Event nodeDropped;
 
     private void Update()
     {
@@ -25,6 +27,8 @@ public class BoardHolder : MonoBehaviour, IHolder
     {
         node.transform.SetParent(transform);
         node.transform.DOMove(transform.position, 0.2f);
+        node.currentHolder = this;
         this.node = node;
+        nodeDropped.occurred();
     }
 }
