@@ -1,25 +1,46 @@
 ﻿using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour
 {
-    public Level[] levels;
-
     private List<GameObject> nodes = new List<GameObject>();
 
     private Deck deck;
+
     private Board board;
+
+    public Level[] levels;
+
+    public int currentLevel;
+
+    public Event eventLevelStart;
+    public Event eventLevelNext;
+
+    [Header("UI")]
+    public Text levelNo;
 
     private void Start()
     {
         deck = FindObjectOfType<Deck>();
         board = FindObjectOfType<Board>();
-        generateLevel(0);
+        int level = PlayerPrefs.GetInt("levelsUnlocked", 0);
+        if (level >= levels.Length)
+        {
+            level = levels.Length - 1;
+        }
+        generateLevel(level);
     }
 
     private void generateLevel(int levelNumber)
     {
+        currentLevel = levelNumber;
+
+        levelNo.text = (currentLevel + 1).ToString();
+
+        eventLevelStart.occurred();
+
         //Destroy any previous nodes before generating the level
         destroyNodes();
 
@@ -231,7 +252,7 @@ public class LevelManager : MonoBehaviour
         GameObject lineVerticalPrefab = Resources.Load("Prefabs/Nodes/Line Vertical") as GameObject;
         if (lineVerticalPrefab)
         {
-            for (int i = 0; i < levels[levelNumber].lineHorizontol.Length; i++)
+            for (int i = 0; i < levels[levelNumber].lineVertical.Length; i++)
             {
                 nodes.Add(spawnNode(lineVerticalPrefab));
                 if (board)
@@ -339,6 +360,33 @@ public class LevelManager : MonoBehaviour
 
     public void eventLevelCompleted()
     {
+        PlayerPrefs.SetInt("levelsUnlocked",currentLevel+1);
+        Invoke("playNextLevel", 1);
+    }
 
+    private void playNextLevel()
+    {
+        eventLevelNext.occurred();
+    }
+
+    public void eventNextLevel()
+    {
+        if (currentLevel < PlayerPrefs.GetInt("levelsUnlocked", 0) && currentLevel < levels.Length - 1)
+        {
+            generateLevel(currentLevel + 1);
+        }
+        else
+        {
+            generateLevel(currentLevel);
+        }
+    }
+
+
+    public void eventPreviousLevel()
+    {
+        if (currentLevel > 0)
+        {
+            generateLevel(currentLevel - 1);
+        }
     }
 }

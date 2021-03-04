@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2541918846aca042b94192d83fd800b, type: 3}
   m_Name: Level #2
   m_EditorClassIdentifier: 
-  boardWidth: 0
-  boardHeight: 0
-  biConnectorLeftDown: 
-  biConnectorRightDown: 
-  biConnectorUpLeft: 
-  biConnectorUpRight: 
+  boardWidth: 5
+  boardHeight: 5
+  biConnectorLeftDown: 0d000000
+  biConnectorRightDown: 0c000000
+  biConnectorUpLeft: 11000000
+  biConnectorUpRight: 10000000
   boltDown: 
   boltLeft: 
   boltRight: 
-  boltUp: 
-  bulbDown: 
+  boltUp: 12000000
+  bulbDown: 0b000000
   bulbLeft: 
   bulbRight: 
   bulbUp: 

@@ -7,6 +7,11 @@ public class BoardHolder : MonoBehaviour, IHolder
     public NodeType expectedNodeType;
     public int boardHolderID;
     public Event nodeDropped;
+    private SpriteRenderer mainSprite;
+    private void Awake()
+    {
+        mainSprite = GetComponent<SpriteRenderer>();
+    }
 
     private void Update()
     {
@@ -30,5 +35,21 @@ public class BoardHolder : MonoBehaviour, IHolder
         node.currentHolder = this;
         this.node = node;
         nodeDropped.occurred();
+    }
+
+    public void eventLevelCompleted()
+    {
+        if (mainSprite)
+        {
+            mainSprite.DOColor(new Color(0, 0, 0, 0), 0.2f);
+        }
+    }
+
+    public void eventLevelStart()
+    {
+        if (mainSprite)
+        {
+            mainSprite.DOColor(new Color(0, 0, 0, 1), 0.2f);
+        }
     }
 }

@@ -2,9 +2,6 @@
 [CreateAssetMenu]
 public class Level : ScriptableObject
 {
-    public int boardWidth;
-    public int boardHeight;
-
     //Size of the array determines how many of these are needed in a level
     //Elements of the array denote the location in grid in order to trigger level completion
 

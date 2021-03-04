@@ -12,24 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2541918846aca042b94192d83fd800b, type: 3}
   m_Name: Level #5
   m_EditorClassIdentifier: 
-  boardWidth: 0
-  boardHeight: 0
-  biConnectorLeftDown: 
-  biConnectorRightDown: 
-  biConnectorUpLeft: 
-  biConnectorUpRight: 
+  biConnectorLeftDown: 010000000e000000
+  biConnectorRightDown: 030000000a000000
+  biConnectorUpLeft: 08000000
+  biConnectorUpRight: 06000000
   boltDown: 
   boltLeft: 
-  boltRight: 
+  boltRight: 00000000
   boltUp: 
   bulbDown: 
-  bulbLeft: 
+  bulbLeft: 04000000
   bulbRight: 
-  bulbUp: 
-  lineHorizontol: 
-  lineVertical: 
-  triConnectorRightLeftDown: 
+  bulbUp: 1400000018000000
+  lineHorizontol: 0b0000000d000000
+  lineVertical: 0f00000013000000
+  triConnectorRightLeftDown: 07000000
   triConnectorUpLeftDown: 
   triConnectorUpRightDown: 
-  triConnectorUpRightLeft: 
+  triConnectorUpRightLeft: 0c000000
   quadConnector: 
